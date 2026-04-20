@@ -103,7 +103,6 @@ textarea {
   position: relative;
   z-index: 1;
 }
-
 @media (max-width: 980px) {
   .primary-nav {
     position: absolute;
