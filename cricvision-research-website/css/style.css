@@ -105,26 +105,46 @@ textarea {
 }
 
 /* ================================
-   HEADER / NAVIGATION
+   HEADER / NAVIGATION - APPLE STYLE GLASS
 ================================ */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(227, 234, 243, 0.9);
-  transition: box-shadow var(--normal), background var(--normal);
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: saturate(180%) blur(26px);
+  -webkit-backdrop-filter: saturate(180%) blur(26px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.42);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
+  transition:
+    background var(--normal),
+    box-shadow var(--normal),
+    border-color var(--normal);
+}
+
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.72),
+      rgba(255, 255, 255, 0.38)
+    );
+  pointer-events: none;
+  z-index: -1;
 }
 
 .site-header:hover {
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  background: rgba(255, 255, 255, 0.72);
+  border-bottom-color: rgba(227, 234, 243, 0.65);
+  box-shadow: 0 10px 35px rgba(15, 23, 42, 0.06);
 }
 
 .nav-shell {
-  height: 68px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -139,26 +159,29 @@ textarea {
 }
 
 .brand {
-  transition: transform var(--normal);
+  transition: transform var(--normal), opacity var(--normal);
 }
 
 .brand:hover {
   transform: translateY(-1px);
+  opacity: 0.92;
 }
 
 .brand-mark {
-  width: 38px;
-  height: 38px;
-  border-radius: 13px;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
   display: grid;
   place-items: center;
   position: relative;
   overflow: hidden;
   color: white;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 900;
   background: linear-gradient(135deg, var(--blue), var(--cyan));
-  box-shadow: 0 12px 26px rgba(37, 99, 235, 0.25);
+  box-shadow:
+    0 10px 24px rgba(37, 99, 235, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
 }
 
 .brand-mark::after {
@@ -177,32 +200,44 @@ textarea {
 
 .brand strong {
   display: block;
-  font-size: 14px;
+  font-size: 13.5px;
   line-height: 1.05;
-  color: var(--heading);
+  color: rgba(15, 23, 42, 0.92);
+  letter-spacing: -0.01em;
 }
 
 .brand small {
   display: block;
-  color: var(--muted);
-  font-size: 10px;
+  color: rgba(96, 112, 132, 0.88);
+  font-size: 9.8px;
   margin-top: 2px;
 }
 
 .primary-nav {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
+  padding: 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    0 8px 24px rgba(15, 23, 42, 0.035);
 }
 
 .primary-nav a {
   position: relative;
-  padding: 9px 12px;
-  border-radius: 13px;
-  color: #344054;
+  padding: 8px 11px;
+  border-radius: 999px;
+  color: rgba(52, 64, 84, 0.9);
   font-weight: 650;
-  font-size: 12.5px;
-  transition: color var(--fast), background var(--fast), transform var(--fast);
+  font-size: 12px;
+  transition:
+    color var(--fast),
+    background var(--fast),
+    transform var(--fast),
+    box-shadow var(--fast);
 }
 
 .primary-nav a::before {
@@ -210,7 +245,7 @@ textarea {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(135deg, var(--navy), var(--deep));
+  background: rgba(7, 27, 53, 0.92);
   opacity: 0;
   transform: scale(0.92);
   transition: opacity var(--fast), transform var(--fast);
@@ -231,18 +266,21 @@ textarea {
 
 .nav-toggle {
   display: none;
-  background: #fff;
-  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid rgba(227, 234, 243, 0.72);
   border-radius: 13px;
   width: 42px;
   height: 38px;
   padding: 8px;
   cursor: pointer;
-  transition: transform var(--fast), box-shadow var(--fast);
+  transition: transform var(--fast), box-shadow var(--fast), background var(--fast);
 }
 
 .nav-toggle:hover {
   transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.82);
   box-shadow: var(--shadow-sm);
 }
 
@@ -261,7 +299,7 @@ textarea {
 
 .hero {
   padding: 66px 0 72px;
-  min-height: calc(100vh - 68px);
+  min-height: calc(100vh - 64px);
   display: flex;
   align-items: center;
 }
@@ -352,8 +390,12 @@ h3 {
   font-size: 12.5px;
   font-weight: 800;
   border: 1px solid var(--line);
-  transition: transform var(--normal), box-shadow var(--normal), border-color var(--normal),
-    background var(--normal), color var(--normal);
+  transition:
+    transform var(--normal),
+    box-shadow var(--normal),
+    border-color var(--normal),
+    background var(--normal),
+    color var(--normal);
 }
 
 .btn::after {
@@ -464,7 +506,12 @@ h3 {
   inset: -1px;
   border-radius: inherit;
   pointer-events: none;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.22), transparent 35%, rgba(18, 184, 215, 0.18));
+  background: linear-gradient(
+    135deg,
+    rgba(37, 99, 235, 0.22),
+    transparent 35%,
+    rgba(18, 184, 215, 0.18)
+  );
   opacity: 0;
   transition: opacity var(--normal);
   z-index: -1;
@@ -711,7 +758,12 @@ h3 {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.06), transparent 42%, rgba(18, 184, 215, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(37, 99, 235, 0.06),
+    transparent 42%,
+    rgba(18, 184, 215, 0.05)
+  );
   opacity: 0;
   transition: opacity var(--normal);
   pointer-events: none;
@@ -1309,6 +1361,7 @@ tbody tr:hover {
   100% {
     transform: translateX(-120%) rotate(25deg);
   }
+
   82% {
     transform: translateX(120%) rotate(25deg);
   }
@@ -1319,6 +1372,7 @@ tbody tr:hover {
   100% {
     box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.13);
   }
+
   50% {
     box-shadow: 0 0 0 9px rgba(37, 99, 235, 0.04);
   }
@@ -1329,6 +1383,7 @@ tbody tr:hover {
   100% {
     box-shadow: 0 0 0 7px rgba(37, 99, 235, 0.1);
   }
+
   50% {
     box-shadow: 0 0 0 11px rgba(37, 99, 235, 0.04);
   }
@@ -1339,6 +1394,7 @@ tbody tr:hover {
   100% {
     transform: translateY(0) rotateX(0deg) rotateY(0deg);
   }
+
   50% {
     transform: translateY(-10px) rotateX(1.5deg) rotateY(-1.5deg);
   }
@@ -1349,6 +1405,7 @@ tbody tr:hover {
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-8px);
   }
@@ -1360,6 +1417,7 @@ tbody tr:hover {
     transform: translateX(-35%);
     opacity: 0.45;
   }
+
   50% {
     transform: translateX(25%);
     opacity: 0.8;
@@ -1374,16 +1432,21 @@ tbody tr:hover {
   .primary-nav {
     position: absolute;
     right: 4%;
-    top: 76px;
+    top: 74px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    background: rgba(255, 255, 255, 0.96);
-    border: 1px solid var(--line);
-    border-radius: 22px;
+    gap: 4px;
     padding: 12px;
-    box-shadow: var(--shadow);
     width: min(330px, 92vw);
+    border-radius: 24px;
+
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: saturate(180%) blur(28px);
+    -webkit-backdrop-filter: saturate(180%) blur(28px);
+    border: 1px solid rgba(255, 255, 255, 0.48);
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.16);
+
     opacity: 0;
     transform: translateY(-12px) scale(0.98);
     pointer-events: none;
@@ -1398,6 +1461,11 @@ tbody tr:hover {
 
   .primary-nav a {
     font-size: 13px;
+    padding: 11px 13px;
+  }
+
+  .primary-nav a::before {
+    background: rgba(7, 27, 53, 0.94);
   }
 
   .nav-toggle {
