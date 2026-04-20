@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CricVision Research - Player Based Segmentation and Wicket Event Related Video Analysis in Cricket Videos." />
+  <link rel="stylesheet" href="css/style.css" />
+  <title>Domain | CricVision Research</title>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a href="index.html" class="brand" aria-label="CricVision Research home">
+        <span class="brand-mark">CV</span>
+        <span><strong>CricVision Research</strong><small>25-26J-148 · Sports Analytics</small></span>
+      </a>
+      <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="domain.html">Domain</a>
+        <a href="milestones.html">Milestones</a>
+        <a href="documents.html">Documents</a>
+        <a href="presentations.html">Presentations</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+  <section class="page-hero grid-bg"><div class="container"><span class="section-kicker">Research Domain</span><h1>Domain, gap, problem, objectives and methodology</h1><p>Automatic analysis of cricket videos through multimodal AI, event detection, and player-based retrieval.</p></div></section>
+  <section class="section">
+    <div class="container two-col">
+      <article class="content-card reveal"><h2>Literature Survey</h2><p>Sports video analysis has moved from rule-based event detection to deep learning and multimodal systems. In cricket, existing methods often detect boundaries, wickets, or highlights, but many still need manual processing or focus on short clips instead of full-length, player-specific retrieval.</p><p>OCR and STT techniques can extract contextual signals from scoreboards and commentary, while computer vision models can detect visual cues such as umpire gestures. Semantic embeddings and vector search make it possible to retrieve match moments quickly through natural language queries.</p></article>
+      <article class="content-card reveal"><h2>Research Gap</h2><p>Existing systems do not sufficiently support full-match player-based filtering, automatic navigation to player-specific moments, or reliable player-event linking with timestamps. Near-miss wicket events and batsman/bowler change tracking are also rarely handled in traditional highlight-generation systems.</p></article>
+      <article class="content-card reveal"><h2>Research Problem</h2><p>Long cricket match videos require users to manually scroll through hours of footage to find specific player actions and events such as FOUR, SIX, WICKET, and wicket-related near misses. This wastes time for fans, coaches, analysts, broadcasters, and training institutions.</p></article>
+      <article class="content-card reveal"><h2>Research Objectives</h2><ul class="nice-list"><li>Segment cricket videos based on player identity.</li><li>Detect and index important cricket events with timestamps.</li><li>Link players with detected key events.</li><li>Support player-wise filtering and event-wise navigation.</li><li>Enable semantic search for fast match review.</li></ul></article>
+    </div>
+  </section>
+  <section class="section section-alt">
+    <div class="container">
+      <div class="center reveal"><span class="section-kicker">Methodology</span><h2>Multimodal cricket video intelligence pipeline</h2><p class="section-lead">The system turns unstructured match videos into searchable event timelines.</p></div>
+      <div class="process-grid">
+        <article class="process-card reveal"><span>01</span><h3>Video Preprocessing</h3><p>Frames are sampled from cricket videos and relevant areas such as scoreboards and umpire regions are extracted.</p></article>
+        <article class="process-card reveal"><span>02</span><h3>Scoreboard OCR</h3><p>EasyOCR extracts scoreboard text. Cleaning, token filtering, and player-name matching improve reliability.</p></article>
+        <article class="process-card reveal"><span>03</span><h3>Event Detection</h3><p>EfficientNet-B0 detects umpire frames and ResNet-18 classifies event gestures such as FOUR, SIX, WICKET, and NO ACTION.</p></article>
+        <article class="process-card reveal"><span>04</span><h3>Player Identification</h3><p>NER and roster matching identify batsmen and bowlers from text streams and map them to detected events.</p></article>
+        <article class="process-card reveal"><span>05</span><h3>Timeline Construction</h3><p>Events and player identities are synchronized using timestamps to create structured video segments.</p></article>
+        <article class="process-card reveal"><span>06</span><h3>Semantic Search</h3><p>MiniLM embeddings and FAISS-style vector retrieval enable natural-language search over match moments.</p></article>
+      </div>
+    </div>
+  </section>
+  <section class="section"><div class="container"><div class="tech-cloud reveal"><span>Python</span><span>OpenCV</span><span>EasyOCR</span><span>Whisper/STT</span><span>NER</span><span>EfficientNet-B0</span><span>ResNet-18</span><span>MiniLM</span><span>FAISS</span><span>HTML/CSS</span></div></div></section>
+</main>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="footer-brand" href="index.html"><span class="brand-mark">CV</span><strong>CricVision Research</strong></a>
+        <p>Player Based Segmentation and Wicket Event Related Video Analysis in Cricket Videos.</p>
+        <p class="muted">B.Sc. (Hons) Information Technology Specializing in Data Science · SLIIT</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="domain.html">Research Domain</a>
+        <a href="milestones.html">Milestones</a>
+        <a href="documents.html">Documents</a>
+        <a href="presentations.html">Presentations</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <a href="mailto:dimalsharathnayake05@gmail.com">dimalsharathnayake05@gmail.com</a>
+        <a href="mailto:anuradha.k@sliit.lk">Supervisor</a>
+        <a href="mailto:adya.d@sliit.lk">Co-Supervisor</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© <span id="year"></span> Group 25-26J-148 · CricVision Research. All rights reserved.</div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>
