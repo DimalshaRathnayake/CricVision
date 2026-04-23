@@ -1644,3 +1644,24 @@ tbody tr:hover {
     transform: none;
   }
 }
+
+
+.member-photo {
+  width: 120px;
+  height: 120px;
+  margin: -60px auto 16px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #fff;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  background: #f3f6fb;
+  position: relative;
+  z-index: 2;
+}
+
+.member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
