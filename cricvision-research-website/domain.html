@@ -7,19 +7,25 @@
   <link rel="stylesheet" href="css/style.css" />
   <title>Domain | CricVision Research</title>
 </head>
+
 <body>
   <header class="site-header">
     <div class="container nav-shell">
       <a href="index.html" class="brand" aria-label="CricVision Research home">
         <span class="brand-mark">CV</span>
-        <span><strong>CricVision Research</strong><small>25-26J-148 · Sports Analytics</small></span>
+        <span>
+          <strong>CricVision Research</strong>
+          <small>25-26J-148 · Sports Analytics</small>
+        </span>
       </a>
+
       <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
+
       <nav class="primary-nav" aria-label="Primary navigation">
         <a href="index.html">Home</a>
-        <a href="domain.html">Domain</a>
+        <a href="domain.html" class="active">Domain</a>
         <a href="milestones.html">Milestones</a>
         <a href="documents.html">Documents</a>
         <a href="presentations.html">Presentations</a>
@@ -28,38 +34,443 @@
       </nav>
     </div>
   </header>
+
   <main>
-  <section class="page-hero grid-bg"><div class="container"><span class="section-kicker">Research Domain</span><h1>Domain, gap, problem, objectives and methodology</h1><p>Automatic analysis of cricket videos through multimodal AI, event detection, and player-based retrieval.</p></div></section>
-  <section class="section">
-    <div class="container two-col">
-      <article class="content-card reveal"><h2>Literature Survey</h2><p>Sports video analysis has moved from rule-based event detection to deep learning and multimodal systems. In cricket, existing methods often detect boundaries, wickets, or highlights, but many still need manual processing or focus on short clips instead of full-length, player-specific retrieval.</p><p>OCR techniques can extract contextual signals from scoreboards and commentary, while computer vision models can detect visual cues such as umpire gestures. Semantic embeddings and vector search make it possible to retrieve match moments quickly through natural language queries.</p></article>
-      <article class="content-card reveal"><h2>Research Gap</h2><p>Existing systems do not sufficiently support full-match player-based filtering, automatic navigation to player-specific moments, or reliable player-event linking with timestamps. Near-miss wicket events and batsman/bowler change tracking are also rarely handled in traditional highlight-generation systems.</p></article>
-      <article class="content-card reveal"><h2>Research Problem</h2><p>Long cricket match videos require users to manually scroll through hours of footage to find specific player actions and events such as FOUR, SIX, WICKET, and wicket-related near misses. This wastes time for fans, coaches, analysts, broadcasters, and training institutions.</p></article>
-      <article class="content-card reveal"><h2>Research Objectives</h2><ul class="nice-list"><li>Segment cricket videos based on player identity.</li><li>Detect and index important cricket events with timestamps.</li><li>Link players with detected key events.</li><li>Support player-wise filtering and event-wise navigation.</li><li>Enable semantic search for fast match review.</li></ul></article>
-    </div>
-  </section>
-  <section class="section section-alt">
-    <div class="container">
-      <div class="center reveal"><span class="section-kicker">Methodology</span><h2>Multimodal cricket video intelligence pipeline</h2><p class="section-lead">The system turns unstructured match videos into searchable event timelines.</p></div>
-      <div class="process-grid">
-        <article class="process-card reveal"><span>01</span><h3>Video Preprocessing</h3><p>Frames are sampled from cricket videos and relevant areas such as scoreboards and umpire regions are extracted.</p></article>
-        <article class="process-card reveal"><span>02</span><h3>Scoreboard OCR</h3><p>EasyOCR extracts scoreboard text. Cleaning, token filtering, and player-name matching improve reliability.</p></article>
-        <article class="process-card reveal"><span>03</span><h3>Event Detection</h3><p>EfficientNet-B0 detects umpire frames and ResNet-18 classifies event gestures such as FOUR, SIX, WICKET, and NO ACTION.</p></article>
-        <article class="process-card reveal"><span>04</span><h3>Player Identification</h3><p>NER and roster matching identify batsmen and bowlers from text streams and map them to detected events.</p></article>
-        <article class="process-card reveal"><span>05</span><h3>Timeline Construction</h3><p>Events and player identities are synchronized using timestamps to create structured video segments.</p></article>
-        <article class="process-card reveal"><span>06</span><h3>Semantic Search</h3><p>MiniLM embeddings and FAISS-style vector retrieval enable natural-language search over match moments.</p></article>
+    <section class="page-hero grid-bg">
+      <div class="container">
+        <span class="section-kicker">Research Domain</span>
+        <h1>Domain, gap, problem, objectives and methodology</h1>
+        <p>
+          Automatic cricket video segmentation and retrieval through multimodal AI, scoreboard OCR,
+          umpire-signal event detection, player identification, timestamp synchronization and structured search.
+        </p>
       </div>
-    </div>
-  </section>
-  <section class="section"><div class="container"><div class="tech-cloud reveal"><span>Python</span><span>OpenCV</span><span>EasyOCR</span><span>Whisper/STT</span><span>NER</span><span>EfficientNet-B0</span><span>ResNet-18</span><span>MiniLM</span><span>FAISS</span><span>HTML/CSS</span></div></div></section>
-</main>
+    </section>
+
+    <section class="section">
+      <div class="container two-col">
+
+        <article class="content-card reveal">
+          <h2>Literature Survey</h2>
+          <p>
+            Sports video analysis has developed from traditional rule-based systems into deep learning and
+            multimodal video understanding approaches. In cricket, researchers have studied event detection,
+            video summarization, highlight generation, scoreboard automation, umpire-signal recognition,
+            semantic event classification and player-specific highlight generation [1], [2], [5], [6], [7], [8].
+          </p>
+          <p>
+            Existing cricket video summarization systems help users reduce the time required to watch long
+            match recordings. However, many of these systems mainly generate highlight clips or summarized
+            videos rather than creating structured player-event records. This limits their ability to support
+            direct retrieval tasks such as finding all boundaries by a batsman, locating a specific wicket,
+            or identifying wickets taken by a particular bowler [1], [2], [6], [15].
+          </p>
+          <p>
+            Umpire-signal recognition has also been explored as a method for detecting cricket events.
+            Earlier and recent studies have used machine learning, CNN-based models, deep features,
+            SVM classifiers and temporal models to identify umpire actions such as SIX, OUT, WIDE and
+            NO BALL [20], [21], [22], [23], [24], [25]. These studies confirm that umpire gestures are useful
+            visual cues, but most of them focus on event recognition rather than linking those events with
+            batsmen, bowlers and timestamps.
+          </p>
+          <p>
+            Multimodal systems combine visual, audio and textual signals for cricket video analysis.
+            OCR-based scoreboard extraction can provide player names and match context, while computer
+            vision models can detect visual event evidence such as umpire gestures. Recent work also shows
+            that OCR, action recognition, transfer learning and deep learning-based event spotting can improve
+            sports video understanding [13], [14], [18], [27], [28], [30], [31].
+          </p>
+        </article>
+
+        <article class="content-card reveal">
+          <h2>Research Gap</h2>
+          <p>
+            Although existing studies have made progress in cricket event detection, highlight generation,
+            scoreboard automation and video summarization, they do not fully address the need for an
+            integrated cricket-specific retrieval pipeline. Existing approaches commonly detect events or
+            generate summaries, but they do not consistently connect event type, player identity, player role,
+            timestamp and playable video segment in a searchable dashboard.
+          </p>
+          <p>
+            The main gap is the lack of a complete workflow that combines scoreboard OCR, umpire-signal
+            event recognition, NER-supported player identification, batsman and bowler role extraction,
+            timestamp synchronization, video segmentation and query-based retrieval. As a result, users
+            still need to manually review long cricket videos to locate player-specific actions.
+          </p>
+          <p>
+            Traditional highlight systems also do not adequately support player-wise filtering, event-wise
+            navigation, wicket attribution or structured search queries such as “show the first six”,
+            “show wickets”, “Kohli batting”, “Kohli out” or “wickets by Bumrah”.
+          </p>
+        </article>
+
+        <article class="content-card reveal">
+          <h2>Research Problem</h2>
+          <p>
+            Cricket videos are long and contain many important moments such as boundaries, wickets,
+            appeals, scoreboard changes and player-specific actions. Fans, coaches, analysts, broadcasters
+            and training institutions often need to locate specific moments quickly. However, without an
+            automated player-event retrieval system, they must manually scroll through long recordings.
+          </p>
+          <p>
+            This manual review process is time-consuming, inconsistent and inefficient. Existing highlight
+            clips may show only selected moments and may not preserve complete player-event context.
+            Therefore, there is a need for a system that can automatically identify events, extract player
+            identities, associate those players with events and provide timestamped video retrieval.
+          </p>
+          <p>
+            The research problem addressed in this project is the absence of a practical cricket-specific
+            system that jointly performs event detection, player identification, event-player association,
+            timestamp synchronization, video segmentation and dashboard-based retrieval.
+          </p>
+        </article>
+
+        <article class="content-card reveal">
+          <h2>Research Objectives</h2>
+          <ul class="nice-list">
+            <li>Develop an automated cricket video segmentation framework based on player identity and event type.</li>
+            <li>Detect major cricket events such as FOUR, SIX, OUT and NO-ACTION using umpire-signal recognition.</li>
+            <li>Extract scoreboard information using OCR and identify batsmen and bowlers from noisy broadcast text.</li>
+            <li>Apply NER-supported and dictionary-based fuzzy matching for player-name recognition.</li>
+            <li>Synchronize detected events and player information using timestamps.</li>
+            <li>Generate structured event-player records containing event type, player role and timestamp.</li>
+            <li>Support player-wise filtering, event-wise navigation, wicket attribution and query-based retrieval.</li>
+            <li>Reduce manual video review effort for cricket fans, coaches, analysts and broadcasters.</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="center reveal">
+          <span class="section-kicker">Methodology</span>
+          <h2>Multimodal cricket video intelligence pipeline</h2>
+          <p class="section-lead">
+            The proposed framework converts unstructured cricket videos into searchable, timestamped
+            event-player records using visual and textual processing streams.
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <article class="process-card reveal">
+            <span>01</span>
+            <h3>Video Upload and Preprocessing</h3>
+            <p>
+              Cricket videos are uploaded to the system and processed at selected frame intervals.
+              Each extracted frame is stored with its frame index and timestamp. This timestamp is
+              later used to connect detected events with the correct video position.
+            </p>
+          </article>
+
+          <article class="process-card reveal">
+            <span>02</span>
+            <h3>Scoreboard Region Extraction</h3>
+            <p>
+              Since cricket scoreboards usually appear near the bottom of broadcast frames, the lower
+              region of each frame is cropped and passed to the OCR pipeline. This reduces background
+              noise and helps the OCR model focus on player names, scores and over information.
+            </p>
+          </article>
+
+          <article class="process-card reveal">
+            <span>03</span>
+            <h3>Scoreboard OCR Processing</h3>
+            <p>
+              EasyOCR is used to extract scoreboard text. The raw OCR output is cleaned by removing
+              unnecessary symbols, filtering score values, normalizing text and extracting candidate
+              player-name tokens. This step prepares noisy scoreboard text for player identification [13].
+            </p>
+          </article>
+
+          <article class="process-card reveal">
+            <span>04</span>
+            <h3>Umpire Detection</h3>
+            <p>
+              EfficientNet-B0 is used as a binary classifier to detect whether an umpire is visible in a
+              frame. This step prevents the event classifier from processing irrelevant frames that only
+              contain players, crowd, field background or scoreboard graphics [26].
+            </p>
+          </article>
+
+          <article class="process-card reveal">
+            <span>05</span>
+            <h3>Umpire Gesture Classification</h3>
+            <p>
+              Frames containing umpires are passed to a ResNet-18 classifier. The classifier identifies
+              cricket event classes such as FOUR, SIX, OUT and NO-ACTION. The NO-ACTION class helps
+              reduce false event detection when an umpire is visible but not signalling a major event [11].
+            </p>
+          </article>
+
+          <article class="process-card reveal">
+            <span>06</span>
+            <h3>Player Identification</h3>
+            <p>
+              Player names are identified using OCR candidate extraction, NER-supported entity detection
+              and fuzzy dictionary-based matching. This improves robustness when OCR produces partial
+              names, spelling errors or extra scoreboard text [12].
+            </p>
+          </article>
+
+          <article class="process-card reveal">
+            <span>07</span>
+            <h3>Event-Player Association</h3>
+            <p>
+              The detected event timestamp is matched with the closest available scoreboard/player
+              information. The final event-player record contains the event type, timestamp, batsman
+              details, bowler details and video segment reference.
+            </p>
+          </article>
+
+          <article class="process-card reveal">
+            <span>08</span>
+            <h3>Video Segmentation</h3>
+            <p>
+              Playable video segments are generated around detected event timestamps. Each segment is
+              connected with event metadata so that users can directly navigate to meaningful match
+              moments instead of manually searching through long videos.
+            </p>
+          </article>
+
+          <article class="process-card reveal">
+            <span>09</span>
+            <h3>Structured Retrieval</h3>
+            <p>
+              The dashboard supports cricket-specific retrieval queries such as “first six”, “show wickets”,
+              “Kohli batting”, “Kohli out” and “wickets by Bumrah”. The rule-based retrieval layer searches
+              structured event-player records and returns the matching timestamped segment.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container two-col">
+
+        <article class="content-card reveal">
+          <h2>Dataset and Annotation</h2>
+          <p>
+            The datasets were prepared from more than 100 publicly available cricket videos collected
+            from YouTube. These videos included different teams, broadcast styles, scoreboard layouts,
+            resolutions, lighting conditions and camera angles.
+          </p>
+          <ul class="nice-list">
+            <li>Umpire detection dataset: 1084 training images and 270 testing images.</li>
+            <li>Umpire detection classes: umpire and non-umpire.</li>
+            <li>Umpire pose dataset: 2000 labelled images.</li>
+            <li>Pose classification classes: FOUR, SIX, OUT and NO-ACTION.</li>
+            <li>Pose dataset split: 1600 training images and 400 testing images.</li>
+            <li>Scoreboard OCR evaluation dataset: 3800 manually verified records.</li>
+            <li>Player role-label evaluation: 800 manually verified role-label instances.</li>
+          </ul>
+        </article>
+
+        <article class="content-card reveal">
+          <h2>Implemented Technologies</h2>
+          <p>
+            The system was implemented as a Python-based video analysis and retrieval pipeline.
+            Computer vision, OCR, deep learning, text processing and structured retrieval methods were
+            combined to produce a complete cricket video intelligence workflow.
+          </p>
+          <ul class="nice-list">
+            <li>OpenCV for frame extraction and video processing.</li>
+            <li>EasyOCR for scoreboard text extraction.</li>
+            <li>PyTorch, timm and torchvision for model inference.</li>
+            <li>EfficientNet-B0 for umpire presence detection.</li>
+            <li>ResNet-18 for umpire gesture classification.</li>
+            <li>Transformer-based NER for player-name extraction.</li>
+            <li>Fuzzy string matching for player roster matching.</li>
+            <li>MiniLM embeddings and FAISS-style indexing for semantic retrieval support.</li>
+            <li>HTML, CSS and JavaScript for the research website interface.</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="center reveal">
+          <span class="section-kicker">Evaluation Summary</span>
+          <h2>Performance of the proposed framework</h2>
+          <p class="section-lead">
+            The framework was evaluated using component-level and retrieval-level metrics.
+          </p>
+        </div>
+
+        <div class="table-wrap reveal">
+          <table class="research-table">
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Evaluation Metric</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Umpire Detection</td>
+                <td>Accuracy / Weighted F1-score</td>
+                <td>0.91 / 0.92</td>
+              </tr>
+              <tr>
+                <td>Event Classification</td>
+                <td>Accuracy / Macro F1-score</td>
+                <td>0.83 / 0.83</td>
+              </tr>
+              <tr>
+                <td>Scoreboard OCR</td>
+                <td>Normalized Exact-Match Accuracy</td>
+                <td>0.9211</td>
+              </tr>
+              <tr>
+                <td>Player Identification</td>
+                <td>OCR + NER + Fuzzy Matching Accuracy</td>
+                <td>0.83</td>
+              </tr>
+              <tr>
+                <td>NER Contribution</td>
+                <td>OCR + Fuzzy vs OCR + NER + Fuzzy</td>
+                <td>0.79 to 0.83</td>
+              </tr>
+              <tr>
+                <td>Event-Player Association</td>
+                <td>Batsman 1 / Batsman 2 / Bowler Accuracy</td>
+                <td>0.963 / 0.926 / 0.852</td>
+              </tr>
+              <tr>
+                <td>Full Event-Player Association</td>
+                <td>Complete Association Rate</td>
+                <td>0.741</td>
+              </tr>
+              <tr>
+                <td>Dashboard Retrieval</td>
+                <td>Rule-Based Query Retrieval Accuracy</td>
+                <td>190 / 200 = 95.0%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container two-col">
+
+        <article class="content-card reveal">
+          <h2>Expected Outcome</h2>
+          <p>
+            The final outcome of this research is a cricket video segmentation and retrieval framework
+            that reduces manual review effort by automatically producing timestamped, searchable and
+            player-linked match records.
+          </p>
+          <p>
+            The dashboard allows users to retrieve match moments based on player identity, event type,
+            wicket context and cricket-specific query patterns. This makes the system useful for cricket
+            coaching, tactical review, sports analytics, broadcasting support and fan-based content navigation.
+          </p>
+        </article>
+
+        <article class="content-card reveal">
+          <h2>Limitations and Future Work</h2>
+          <p>
+            The current implementation focuses on FOUR, SIX, OUT and NO-ACTION event classes.
+            Other cricket events such as wides, no-balls, run-outs, reviews, appeals and near-miss
+            wicket events can be added in future versions.
+          </p>
+          <p>
+            OCR performance can be affected by motion blur, low resolution, scoreboard style changes
+            and partial occlusion. Future work can improve robustness using stronger OCR preprocessing,
+            temporal video models, larger datasets and more advanced player-entity linking.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="center reveal">
+          <span class="section-kicker">Technology Stack</span>
+          <h2>Tools and technologies used</h2>
+        </div>
+
+        <div class="tech-cloud reveal">
+          <span>Python</span>
+          <span>OpenCV</span>
+          <span>EasyOCR</span>
+          <span>Whisper/STT</span>
+          <span>NER</span>
+          <span>EfficientNet-B0</span>
+          <span>ResNet-18</span>
+          <span>PyTorch</span>
+          <span>timm</span>
+          <span>MiniLM</span>
+          <span>FAISS</span>
+          <span>HTML/CSS</span>
+          <span>JavaScript</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <article class="content-card reveal">
+          <h2>References</h2>
+
+          <ol class="reference-list">
+            <li>Raval KR, Goyani MM. A survey on event detection based video summarization for cricket. <em>Multimedia Tools and Applications</em>, 81, 29253–29281, 2022. DOI: 10.1007/s11042-022-12834-y</li>
+            <li>Shingrakhia H, Patel H. Cricket video highlight generation methods: A review. <em>ELCVIA Electronic Letters on Computer Vision and Image Analysis</em>, 21(2), 1–22, 2022. DOI: 10.5565/rev/elcvia.1465</li>
+            <li>Nasir MH, Javed A, Irtaza A, Malik H, Mahmood MT. Event detection and summarization of cricket videos. <em>Journal of Image and Graphics</em>, 6(1), 27–32, 2018.</li>
+            <li>Anjum ME, Ali SF, Hassan MT, Adnan MSK. Video summarization: Sports highlights generation. In: <em>16th International Multi Topic Conference</em>, 142–147, 2013. DOI: 10.1109/INMIC.2013.6731340</li>
+            <li>Kolekar MH, Palaniappan K, Sengupta S. Semantic event detection and classification in cricket video sequence. In: <em>ICVGIP</em>, 382–389, 2008. DOI: 10.1109/ICVGIP.2008.102</li>
+            <li>Javed A, Irtaza A, Malik H, Mahmood MT, Adnan S. Multimodal framework based on audio-visual features for summarisation of cricket videos. <em>IET Image Processing</em>, 13(4), 615–622, 2019. DOI: 10.1049/iet-ipr.2018.5589</li>
+            <li>Tang H, Kwatra V, Sargin ME, Gargi U. Detecting highlights in sports videos: Cricket as a test case. In: <em>IEEE ICME</em>, 1–6, 2011. DOI: 10.1109/ICME.2011.6012139</li>
+            <li>Kolekar MH, Sengupta S. Semantic concept mining in cricket videos for automated highlight generation. <em>Multimedia Tools and Applications</em>, 47(3), 545–579, 2010. DOI: 10.1007/s11042-009-0337-1</li>
+            <li>Sharma RA, Sankar KP, Jawahar CV. Fine-grain annotation of cricket videos. <em>arXiv preprint</em>, arXiv:1511.07607, 2015.</li>
+            <li>Wang JR, Parameswaran N. Survey of sports video analysis: Research issues and applications. In: <em>Pan-Sydney Area Workshop on Visual Information Processing</em>, 87–90, 2004.</li>
+            <li>He K, Zhang X, Ren S, Sun J. Deep residual learning for image recognition. In: <em>IEEE CVPR</em>, 770–778, 2016. DOI: 10.1109/CVPR.2016.90</li>
+            <li>Devlin J, Chang MW, Lee K, Toutanova K. BERT: Pre-training of deep bidirectional transformers for language understanding. In: <em>NAACL-HLT</em>, 4171–4186, 2019.</li>
+            <li>JaidedAI. EasyOCR. GitHub repository, 2021.</li>
+            <li>Ferdous MJ, Billah M, Karmoker J, Ameen MR, Islam A, Faruqe MO. Automated wicket-taking delivery segmentation and weakness detection in cricket videos using OCR-guided YOLOv8 and trajectory modeling. <em>arXiv preprint</em>, arXiv:2510.18405, 2025.</li>
+            <li>Mahum R, Irtaza A, Rehman SU, Meraj T, Rauf HT. A player-specific framework for cricket highlights generation using deep convolutional neural networks. <em>Electronics</em>, 12(1), 65, 2023. DOI: 10.3390/electronics12010065</li>
+            <li>Shingrakhia HJ, Patel H. SGRNN-AM and HRF-DBN: A hybrid machine learning model for cricket video summarization. <em>The Visual Computer</em>, 38(7), 2285–2301, 2022.</li>
+            <li>Jha A, Sharmila VC, Baghele N, Kiran KR. Semi automatic cricket video summarization. <em>AIP Conference Proceedings</em>, 3044(1), 030010, 2024.</li>
+            <li>Saha A, Kothari N, Shah P, Parekh R, Shekokar N. Cricket highlight generation: Automatic generation framework comprising score extraction and action recognition. In: <em>IEEE GCAT</em>, 1–7, 2022.</li>
+            <li>Abbas K, Saeed M, Khan MI, Ahmed K, Wang H. Deep-learning-based computer vision approach for the segmentation of ball deliveries and tracking in cricket. <em>arXiv preprint</em>, arXiv:2211.12009, 2022.</li>
+            <li>Sakib S, Mridha MAH, Hasan N, Habib MT, Mahbub MS. Event detection from cricket videos using video-based CNN classification of umpire signals. In: <em>STI</em>, 1–5, 2022.</li>
+            <li>Dey A, Biswas S, Abualigah L. Umpire's signal recognition in cricket using an attention based DC-GRU network. <em>International Journal of Engineering</em>, 37(4), 662–674, 2024.</li>
+            <li>Nair VK, Jose RR, Anil PB, Tom M, Lekshmy PL. Automation of cricket scoreboard by recognizing umpire gestures. <em>International Journal of Innovative Science and Modern Engineering</em>, 6(7), 1–7, 2020.</li>
+            <li>Hari R, Wilscy M. Event detection in cricket videos using intensity projection profile of umpire gestures. In: <em>IEEE INDICON</em>, 1–6, 2014.</li>
+            <li>Ravi A, Venugopal H, Paul S, Tizhoosh HR. A dataset and preliminary results for umpire pose detection using SVM classification of deep features. In: <em>IEEE SSCI</em>, 1396–1402, 2018.</li>
+            <li>Mehta S, Sharma P. Automated detection and classification of cricket umpire actions using a hybrid CNN-SVM model. In: <em>ICCCNT</em>, 1–6, 2024.</li>
+            <li>Tan M, Le QV. EfficientNet: Rethinking model scaling for convolutional neural networks. In: <em>ICML</em>, 6105–6114, 2019.</li>
+            <li>Bhalla A, Ahuja A, Pant P, Mittal A. A multimodal approach for automatic cricket video summarization. In: <em>SPIN</em>, 146–150, 2019.</li>
+            <li>Rafiq M, Rafiq G, Agyeman R, Choi GS, Jin SI. Scene classification for sports video summarization using transfer learning. <em>Sensors</em>, 20(6), 1702, 2020.</li>
+            <li>Sadlier DA, O'Connor NE. Event detection in field sports video using audio-visual features and a support vector machine. <em>IEEE Transactions on Circuits and Systems for Video Technology</em>, 15(10), 1225–1233, 2005.</li>
+            <li>Narwal P, Duhan N, Bhatia KK. Dynamic and personalized video summarization towards sports entertainment. <em>Entertainment Computing</em>, 55, 100999, 2025.</li>
+            <li>Xu H, Baniya AA, Well S, Bouadjenek MR, Dazeley R, Aryal S. Action spotting and precise event detection in sports: Datasets, methods, and challenges. <em>arXiv preprint</em>, arXiv:2505.03991, 2025.</li>
+          </ol>
+        </article>
+      </div>
+    </section>
+  </main>
+
   <footer class="footer">
     <div class="container footer-grid">
       <div>
-        <a class="footer-brand" href="index.html"><span class="brand-mark">CV</span><strong>CricVision Research</strong></a>
+        <a class="footer-brand" href="index.html">
+          <span class="brand-mark">CV</span>
+          <strong>CricVision Research</strong>
+        </a>
         <p>Player Based Segmentation and Wicket Event Related Video Analysis in Cricket Videos.</p>
         <p class="muted">B.Sc. (Hons) Information Technology Specializing in Data Science · SLIIT</p>
       </div>
+
       <div>
         <h4>Explore</h4>
         <a href="domain.html">Research Domain</a>
@@ -67,6 +478,7 @@
         <a href="documents.html">Documents</a>
         <a href="presentations.html">Presentations</a>
       </div>
+
       <div>
         <h4>Contact</h4>
         <a href="mailto:dimalsharathnayake05@gmail.com">dimalsharathnayake05@gmail.com</a>
@@ -74,8 +486,12 @@
         <a href="mailto:adya.d@sliit.lk">Co-Supervisor</a>
       </div>
     </div>
-    <div class="footer-bottom">© <span id="year"></span> Group 25-26J-148 · CricVision Research. All rights reserved.</div>
+
+    <div class="footer-bottom">
+      © <span id="year"></span> Group 25-26J-148 · CricVision Research. All rights reserved.
+    </div>
   </footer>
+
   <script src="js/main.js"></script>
 </body>
 </html>
